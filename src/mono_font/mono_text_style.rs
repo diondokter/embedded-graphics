@@ -220,7 +220,7 @@ where
             )?,
             (None, None) => {
                 let dx = (self.font.character_size.width + self.font.character_spacing)
-                    * text.chars().count() as u32;
+                    * text.chars().map(|_| ()).count() as u32;
 
                 position + Size::new(dx, 0)
             }
@@ -263,7 +263,7 @@ where
     fn measure_string(&self, text: &str, position: Point, baseline: Baseline) -> TextMetrics {
         let bb_position = position - Point::new(0, self.baseline_offset(baseline));
 
-        let bb_width = (text.chars().count() as u32
+        let bb_width = (text.chars().map(|_| ()).count() as u32
             * (self.font.character_size.width + self.font.character_spacing))
             .saturating_sub(self.font.character_spacing);
 
